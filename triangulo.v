@@ -9,22 +9,27 @@ module triangulo(
    
    reg [10:0] 		      cx = 0;
    reg [9:0] 		      cy = 0;		      
-   reg [10:0] 		      ponto1_x = 300;
-   reg [9:0] 		      ponto1_y = 100;
-   reg [10:0] 		      ponto2_x = 400;
-   reg [9:0] 		      ponto2_y = 300;
-   reg [10:0] 		      ponto3_x = 600;
-   reg [9:0] 		      ponto3_y = 200;
+   reg [10:0] 		      p1_x = 300;
+   reg [9:0] 		      p1_y = 100;
+   reg [10:0] 		      p2_x = 400;
+   reg [9:0] 		      p2_y = 300;
+   reg [10:0] 		      p3_x = 600;
+   reg [9:0] 		      p3_y = 200;
 
    
-   assign VGA_R = v ? (t ? 4'hc : 4'h0) : 4'b0;
-   assign VGA_G = v ? (t ? 4'hc : 4'h0) : 4'b0;
-   assign VGA_B = v ? (t ? 4'hc : 4'h0) : 4'b0;
+   assign VGA_R = v ? (tr ? 4'hc : 4'h0) : 4'b0;
+   assign VGA_G = v ? (tr ? 4'hc : 4'h0) : 4'b0;
+   assign VGA_B = v ? (tr ? 4'hc : 4'h0) : 4'b0;
+
+   
+   
    
    wire 		      v = (cx >= 285) & (cx < 1555) & (cy >= 35) & (cy < 515);
-   wire 		      t = ((ponto2_x - ponto1_x) * (cy - ponto1_y) - (cx - ponto1_x) * (ponto2_y - ponto1_y) ) <= 0 &
- 				  ((ponto3_x - ponto2_x) * (cy - ponto2_y) - (cx - ponto2_x) * (ponto3_y - ponto2_y) ) <= 0 &
-				  ((ponto1_x - ponto3_x) * (cy - ponto3_y) - (cx - ponto3_x) * (ponto1_y - ponto3_y) ) <= 0;
+   wire 		      tr;
+
+   t teste(p1_x, p1_y, p2_x, p2_y, p3_x, p3_y, cx, cy, tr);
+   
+			      
    reg [10:0] 		      c = 10;
    assign VGA_HS = cx >= 190;
    assign VGA_VS = cy >= 2;
